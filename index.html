@@ -1,0 +1,201 @@
+<html>
+<body ng-app="myApp" ng-controller="inventoryCtrl">
+
+
+    <div class="header">
+        <span ng-show="false">{{itemTypes | json}}</span>
+    </div>
+
+    <div class="json-input-container">
+        <textarea 
+        placeholder={{textAreaPlaceholder}}
+        ng-model="rawInventory">
+    
+        </textarea>
+
+        <button type="button" ng-click="loadJsonInventory(rawInventory)">Submit</button>
+    </div>
+
+
+
+    <div class="filters-controller">
+        <label class="unselectable arrow-label" ng-if="filtersArrow=='up'">Hide Filters</label>
+        <span class="unselectable arrow up-arrow" ng-if="filtersArrow=='up'" ng-click="filterOpenClose('filtersArrow')">&#9650</span>
+        <label class="unselectable arrow-label" ng-if="filtersArrow=='down'">Show Filters</label>
+        <span class="unselectable arrow down-arrow" ng-if="filtersArrow=='down'" ng-click="filterOpenClose('filtersArrow')">&#9660</span>
+    </div>
+
+
+    <div class="filters-container" ng-class="{'collapsed': filtersArrow=='down'}">
+
+        <div class="checkbox-filters-container">
+
+            <div class="item-paint-filters-container space-right">
+
+                <div class="unselectable filter-header"><h4>Item Paint</h4> 
+                    <span class="unselectable arrow up-arrow" ng-if="itemPaintArrow=='up'" ng-click="filterOpenClose('itemPaintArrow')">&#9650</span>
+                    <span class="unselectable arrow down-arrow" ng-if="itemPaintArrow=='down'" ng-click="filterOpenClose('itemPaintArrow')">&#9660</span>
+                </div>
+
+                <div class="checkbox-button-container paint-button-container" ng-class="{'collapsed': itemPaintArrow=='down'}">
+                    <button type="button" ng-click="updateAllCheckboxes('itemPaints', true)">Check All</button>
+                    <button type="button" ng-click="updateAllCheckboxes('itemPaints', false)">Uncheck All</button>
+                </div>
+
+                <div class="item-paint-checkboxes-container" ng-class="{'collapsed': itemPaintArrow=='down'}">
+                    <div class="item-paint-checkbox" ng-repeat="paint in filterOptions.itemPaints">
+                        <input class="filter-checkbox" type="checkbox" ng-model="paint.value">
+                        <label class="checkbox-label">
+                            {{paint.label}}
+                        </label>
+                    </div>
+                </div>
+                
+            </div>
+
+
+            <div class="item-cert-filters-container space-right">
+
+                <div class="unselectable filter-header"><h4>Item Certification</h4> 
+                    <span class="unselectable arrow up-arrow" ng-if="itemCertArrow=='up'" ng-click="filterOpenClose('itemCertArrow')">&#9650</span>
+                    <span class="unselectable arrow down-arrow" ng-if="itemCertArrow=='down'" ng-click="filterOpenClose('itemCertArrow')">&#9660</span>
+                </div>
+
+                <div class="checkbox-button-container cert-button-container" ng-class="{'collapsed': itemCertArrow=='down'}">
+                    <button type="button" ng-click="updateAllCheckboxes('itemCerts', true)">Check All</button>
+                    <button type="button" ng-click="updateAllCheckboxes('itemCerts', false)">Uncheck All</button>
+                </div>
+
+                <div class="item-certs-checkboxes-container" ng-class="{'collapsed': itemCertArrow=='down'}">
+                    <div class="item-certs-checkbox" ng-repeat="cert in filterOptions.itemCerts">
+                        <input class="filter-checkbox" type="checkbox" ng-model="cert.value">
+                        <label class="checkbox-label">
+                            {{cert.label}}
+                        </label>
+                    </div>
+                </div>
+                
+            </div>
+
+            
+            <div class="item-type-filters-container space-right">
+
+                <div class="unselectable filter-header"><h4>Item Type</h4> 
+                    <span class="unselectable arrow up-arrow" ng-if="itemTypeArrow=='up'" ng-click="filterOpenClose('itemTypeArrow')">&#9650</span>
+                    <span class="unselectable arrow down-arrow" ng-if="itemTypeArrow=='down'" ng-click="filterOpenClose('itemTypeArrow')">&#9660</span>
+                </div>
+
+                <div class="checkbox-button-container type-button-container" ng-class="{'collapsed': itemTypeArrow=='down'}">
+                    <button type="button" ng-click="updateAllCheckboxes('itemTypes', true)">Check All</button>
+                    <button type="button" ng-click="updateAllCheckboxes('itemTypes', false)">Uncheck All</button>
+                </div>
+
+                <div class="item-type-checkboxes-container" ng-class="{'collapsed': itemTypeArrow=='down'}">
+                    <div class="item-type-checkbox" ng-repeat="type in filterOptions.itemTypes">
+                        <input class="filter-checkbox" type="checkbox" ng-model="type.value">
+                        <label class="checkbox-label">
+                            {{type.label}}
+                            
+                        </label>
+                    </div>
+                </div>
+                
+            </div>
+
+
+            <div class="item-quality-filters-container space-right">
+                <div class="unselectable filter-header"><h4>Item Quality</h4>
+                    <span class="unselectable arrow up-arrow" ng-if="itemQualityArrow=='up'" ng-click="filterOpenClose('itemQualityArrow')">&#9650</span>
+                    <span class="unselectable arrow down-arrow" ng-if="itemQualityArrow=='down'" ng-click="filterOpenClose('itemQualityArrow')">&#9660</span>
+                </div>
+
+                <div class="checkbox-button-container quality-button-container" ng-class="{'collapsed': itemQualityArrow=='down'}">
+                    <button type="button" ng-click="updateAllCheckboxes('itemQualities', true)">Check All</button>
+                    <button type="button" ng-click="updateAllCheckboxes('itemQualities', false)">Uncheck All</button>
+                </div>
+
+                <div class="item-qualities-checkboxes-container" ng-class="{'collapsed': itemQualityArrow=='down'}">
+                    <div class="item-quality-checkbox" ng-repeat="quality in filterOptions.itemQualities">
+                        <input class="filter-checkbox" type="checkbox" ng-model="quality.value">
+                        <label class="checkbox-label">
+                            {{quality.label}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="item-tradeable-filters-container">
+                <div class="unselectable filter-header"><h4>Item Tradeable</h4>
+                    <span class="unselectable arrow up-arrow" ng-if="itemTradeableArrow=='up'" ng-click="filterOpenClose('itemTradeableArrow')">&#9650</span>
+                    <span class="unselectable arrow down-arrow" ng-if="itemTradeableArrow=='down'" ng-click="filterOpenClose('itemTradeableArrow')">&#9660</span>
+                </div>
+
+                <div class="checkbox-button-container tradeable-button-container" ng-class="{'collapsed': itemTradeableArrow=='down'}">
+                    <button type="button" ng-click="updateAllCheckboxes('itemTradeable', true)">Check All</button>
+                    <button type="button" ng-click="updateAllCheckboxes('itemTradeable', false)">Uncheck All</button>
+                </div>
+
+                <div class="item-qualities-checkboxes-container" ng-class="{'collapsed': itemTradeableArrow=='down'}">
+                    <div class="item-tradeable-checkbox" ng-repeat="tradeable in filterOptions.itemTradeable">
+                        <input class="filter-checkbox" type="checkbox" ng-model="tradeable.value">
+                        <label class="checkbox-label">
+                            {{tradeable.label}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="search-filters-container">
+            <label class="search-label">Search</label>
+            <input type="text" ng-model="query">
+        </div>
+
+        <div class="reset-filters-container">
+            <button type="button" ng-click="resetAllFilters()">Reset Filters</button>
+        </div>
+
+    </div>
+
+
+    <div class="row-count"><span>Rows: {{items.length}}</span></div>
+
+    <div class="table-container">
+        <table>
+            <tr class="col-headers">
+                <td class="unselectable ordering-enabled" ng-click="setOrderBy('product_id')">ID</td>
+                <td class="unselectable ordering-enabled" ng-click="setOrderBy('name')">Name</td>
+                <td class="unselectable ordering-enabled" ng-click="setOrderBy('paint')">Paint</td>
+                <td class="unselectable ordering-enabled" ng-click="setOrderBy('certification')">Certification</td>
+                <td class="unselectable ordering-enabled" ng-click="setOrderBy('rank_label')">Rank Label</td>
+                <td class="unselectable ordering-enabled" ng-click="setOrderBy('special_edition')">Special Edition</td>
+                <td class="unselectable ordering-enabled" ng-click="setOrderBy('slot')">Item Type</td>
+                <td class="unselectable ordering-enabled" ng-click="setOrderBy('quality')">Quality</td>
+                <td class="unselectable ordering-enabled" ng-click="setOrderBy('tradeable')">Tradeable</td>
+            </tr>
+            <tr ng-repeat="item in displayList | inventoryFilter:filterOptions | orderBy : orderByField : reverseBool | filter:query as items">
+                <td>{{item.product_id}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.paint}}</td>
+                <td>{{item.certification}}</td>
+                <td>{{item.rank_label}}</td>
+                <td>{{item.special_edition}}</td>
+                <td>{{item.slot}}</td>
+                <td>{{item.quality}}</td>
+                <td>{{item.tradeable}}</td>
+            </tr>
+        </table>
+    </div>
+
+
+    
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+<script src="app.js"></script>
+<script src="inventoryCtrl.js"></script>
+<script src="inventoryFilter.js"></script>
+<link href="style.css" rel="stylesheet">
+</html>

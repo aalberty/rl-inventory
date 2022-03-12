@@ -1,0 +1,156 @@
+:root {
+    --darkest: #4C0027;
+    --darker: #570530;
+    --dark: #750550;
+    --light: #980F5A;
+    --lightest: #EADEDE;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    margin: auto;
+    width: 100%;
+    background-color: var(--darkest);
+    color: var(--lightest);
+    overflow-x: hidden;
+}
+
+div.header{
+    width: 100%;
+    height: 7%;
+}
+
+div.json-input-container {
+    width: 70vw;
+    height: 10vh;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+
+div.json-input-container > textarea {
+    width: 100%;
+    height: 90%;
+    resize: none;    
+}
+
+div.json-input-container > button {
+    margin: auto;
+    margin-top: 10px;
+}
+
+div.filters-container {
+    height: auto;
+    width: 100vw;
+}
+
+div.filter-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+div.checkbox-filters-container {
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+}
+
+div.item-type-checkboxes-container, div.item-qualities-checkboxes-container {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-flow: column;
+}
+
+div.item-type-checkbox, div.item-quality-checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+div.table-container {
+    background-color: var(--dark);
+    border-radius: 10px;
+    padding: 10px;
+    min-height: 30vh;
+}
+
+div.checkbox-button-container {
+    margin-bottom: 20px;
+}
+
+div.search-filters-container, div.row-count, div.reset-filters-container, div.filters-controller {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+div.filters-controller {
+    margin-top: 20px;
+}
+
+label.arrow-label {
+    margin-right: 20px;
+}
+
+table {
+    margin: auto;
+    width: 70vw;
+}
+
+tr.col-headers {
+    font-weight: 700;
+}
+
+td {
+    text-align: center;
+    border: 1px solid var(--lightest);
+    margin: 0;
+}
+
+textarea, input[type="text"] {
+    background-color: var(--dark);
+    color: var(--lightest);
+}
+
+button {
+    color: var(--lightest);
+    background-color: var(--light);
+}
+
+div.space-right {
+    margin-right: 30px;
+}
+
+input.filter-checkbox {
+    margin-right: 10px;
+}
+
+span.arrow {
+    cursor: pointer;
+}
+
+div.collapsed {
+    height: 0;
+    overflow-y: hidden;
+}
+
+td.ordering-enabled {
+    cursor: pointer;
+}
+
+.unselectable {
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+}
+
+label.search-label {
+    margin-right: 20px;
+}
