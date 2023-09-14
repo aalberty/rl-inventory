@@ -276,6 +276,7 @@ app.controller("inventoryCtrl", function($scope, $http){
         if(parsedInput && parsedInput.inventory){
             fullList = parsedInput.inventory;
             $scope.displayList = parsedInput.inventory.filter(item => item.blueprint_item == "");
+            console.log("items in $scope", $scope.displayList);
             // getPaintColors();
             // getCertTypes();
         } else
