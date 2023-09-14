@@ -16,7 +16,7 @@ var app = angular.module("myAppInventoryFilter", []).filter("inventoryFilter", f
            }
            if(types.indexOf(item.slot.toLowerCase().split(" ").join("")) != -1 &&
            qualities.indexOf(item.quality.toLowerCase().split(" ").join("")) != -1 &&
-           tradeables.indexOf(item.tradeable.toLowerCase().split(" ").join("")) != -1 &&
+           tradeables.indexOf((item.tradeable + '').toLowerCase().split(" ").join("")) != -1 &&
            certs.indexOf(item.certification.toLowerCase().split(" ").join("")) != -1 &&
            paints.indexOf(item.paint.toLowerCase().split(" ").join("")) != -1){
                res.push(item);
