@@ -275,12 +275,17 @@ app.controller("inventoryCtrl", function($scope, $http){
         console.log("parsed input: ", parsedInput);
         if(parsedInput != undefined && parsedInput.inventory){
             fullList = parsedInput.inventory;
-            $scope.displayList = parsedInput.inventory.filter(item => item.blueprint_item == "");
+            $scope.displayList = parsedInput.inventory.map(_mapCallback);
             console.log("items in $scope", $scope.displayList);
             // getPaintColors();
             // getCertTypes();
         } else
             alert("Unexpected JSON format. Please copy entire contents of inventory.json file.");
+    }
+
+    function _mapCallback(ele) {
+        var res = Object.assign(ele, {"blueprint_item": ""});
+        return res;
     }
 
     function filterOpenClose(column){
