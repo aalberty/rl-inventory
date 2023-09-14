@@ -264,7 +264,7 @@ app.controller("inventoryCtrl", function($scope, $http){
     var fullList = [];
 
     function loadJsonInventory(input){
-        //console.log(input);
+        console.log("raw input: ", input);
         var parsedInput;
         try{
             parsedInput = JSON.parse(input);
@@ -272,7 +272,7 @@ app.controller("inventoryCtrl", function($scope, $http){
             alert("Malformed JSON input.");
             return;
         }
-        //console.log("parsed input: ", parsedInput);
+        console.log("parsed input: ", parsedInput);
         if(parsedInput && parsedInput.inventory){
             fullList = parsedInput.inventory;
             $scope.displayList = parsedInput.inventory.filter(item => item.blueprint_item == "");
