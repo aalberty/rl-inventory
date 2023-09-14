@@ -273,7 +273,7 @@ app.controller("inventoryCtrl", function($scope, $http){
             return;
         }
         console.log("parsed input: ", parsedInput);
-        if(parsedInput && parsedInput.inventory){
+        if(parsedInput != undefined && parsedInput.inventory){
             fullList = parsedInput.inventory;
             $scope.displayList = parsedInput.inventory.filter(item => item.blueprint_item == "");
             console.log("items in $scope", $scope.displayList);
